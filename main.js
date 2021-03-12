@@ -12,13 +12,13 @@ let gamespeed = 2;
 
 const gradient = ctx.createLinearGradient(0, 0, 0, 70);
 gradient.addColorStop('0.4', '#fff');
-gradient.addColorStop('0.5', '#000');
-gradient.addColorStop('0.55', '#4040ff');
-gradient.addColorStop('0.6', '#000');
+gradient.addColorStop('0.5', '#f9fc32');
+gradient.addColorStop('0.55', '#fdffaa');
+gradient.addColorStop('0.6', '#f9fc32');
 gradient.addColorStop('0.9', '#fff');
 
 const background = new Image();
-background.src = 'BG.png';
+background.src = 'BG1.png';
 const BG = {
     x1: 0,
     x2: canvas.width,
@@ -28,9 +28,12 @@ const BG = {
 }
 
 function handleBackground(){
-    if (BG.x1 <= -BG.width) BG.x1 = BG.width;
+    if (BG.x1 <= -BG.width + gamespeed) BG.x1 = BG.width;
     else BG.x1 -= gamespeed;
+    if (BG.x2 <= -BG.width + gamespeed) BG.x2 = BG.width;
+    else (BG.x2 -= gamespeed);
     ctx.drawImage(background, BG.x1, BG.y, BG.width, BG.height);
+    ctx.drawImage(background, BG.x2, BG.y, BG.width, BG.height);
 }
 
 function animate() {
@@ -60,6 +63,7 @@ window.addEventListener('keydown', function(e) {
 
 window.addEventListener('keyup', function(e) {
     if (e.code === 'Space') spacePressed = false;
+    bird.frameX = 0;
 });
 
 const bang = new Image();
